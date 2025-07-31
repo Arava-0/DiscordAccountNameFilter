@@ -1,0 +1,25 @@
+{
+  "name": "discord-accout-name-filter",
+  "version": "1.0.0",
+  "description": "Ce bot discord permets de sanctionner automatiquement les utilisateurs qui ont un nom d'utilisateur contenant des pseudos interdits.",
+  "homepage": "https://github.com/Arava-0/DiscordAccountNameFilter#readme",
+  "bugs": {
+    "url": "https://github.com/Arava-0/DiscordAccountNameFilter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arava-0/DiscordAccountNameFilter.git"
+  },
+  "license": "MIT",
+  "author": "Arava",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "discord.js": "^14.21.0",
+    "dotenv": "^17.2.1",
+    "glob": "^11.0.3",
+    "node-cron": "^4.2.1"
+  }
+}
