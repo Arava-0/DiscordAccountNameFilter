@@ -16,8 +16,9 @@
         "warn": "#ffff00"
     },
     "emote": {
-        "error": "❎",
-        "success": "✅",
+        "error": "<:error:1400522765710262322>",
+        "success": "<:success:1400522754494697532>",
+        "update": "<:edit:1400522776632102962>",
         "warn": "⚠️"
     }
 }
