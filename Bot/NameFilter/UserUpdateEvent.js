@@ -37,7 +37,7 @@ module.exports = {
             const staffChannel = guild.safetyAlertsChannel || guild.systemChannel;
 
             const alertEmbed = new EmbedBuilder()
-                .setTitle(`${client.config.emote.alert} **ALERTE PSEUDO INVALID (modification)**`)
+                .setTitle(`${client.config.emote.error} **ALERTE PSEUDO INVALID (modification)**`)
                 .setColor("#920E15")
                 .setDescription(`Le membre \`${newMember.user.tag}\` a modifié son pseudo ou surnom en un nom invalide.\n🔎 Mot détecté : \`${matchedInvalid}\``)
                 .addFields(
