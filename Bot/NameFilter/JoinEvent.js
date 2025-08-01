@@ -32,7 +32,7 @@ module.exports = {
 
         if (matchedInvalid) {
             const alertEmbed = new EmbedBuilder()
-                .setTitle(`${client.config.emote.alert} **ALERTE PSEUDO INVALID**`)
+                .setTitle(`${client.config.emote.error} **ALERTE PSEUDO INVALID**`)
                 .setColor("#920E15")
                 .setDescription(`Le membre \`${member.user.tag}\` a rejoint le serveur avec un pseudo invalide.\n🔎 Mot détecté : \`${matchedInvalid}\``)
                 .addFields(
