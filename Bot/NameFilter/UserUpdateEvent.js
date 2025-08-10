@@ -15,13 +15,18 @@ module.exports = {
         const guild = newMember.guild;
 
         const database = await Core.getConfigFile("nameFilterConfig");
+        const roleConfig = await Core.getConfigFile("nameFilterConfigRoles");
 
-        if (
-            Core.isNullOrUndefined(database) ||
-            Core.isNullOrUndefined(database.invalidPseudos) ||
-            !Array.isArray(database.invalidPseudos)
-        ) {
+        let rolesToMention = ``;
+
+        if (Core.isNullOrUndefined(database) || Core.isNullOrUndefined(database.invalidPseudos) || !Array.isArray(database.invalidPseudos)) {
             return;
+        }
+
+        if (Core.isNullOrUndefined(roleConfig) || Core.isNullOrUndefined(roleConfig.roles) || !Array.isArray(roleConfig.roles) || roleConfig.roles.length === 0) {
+            rolesToMention = `Aucun rôle à mentionner configuré.`;
+        } else {
+            rolesToMention = roleConfig.roles.map(roleId => `<@&${roleId}>`).join(", ");
         }
 
         const invalidPseudos = database.invalidPseudos.map(p => p.toLowerCase());
@@ -49,7 +54,7 @@ module.exports = {
                 );
 
             if (staffChannel)
-                await staffChannel.send({ embeds: [alertEmbed] }).catch(() => {});
+                await staffChannel.send({ content: rolesToMention, embeds: [alertEmbed] }).catch(() => {});
 
             await newMember.kick(`Pseudo invalide: ${username} (${newMember.id}) - Mot détecté : ${matchedInvalid}`)
                 .catch(() => {});

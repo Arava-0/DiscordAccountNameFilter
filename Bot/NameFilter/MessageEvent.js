@@ -17,9 +17,18 @@ module.exports = {
         if (!guild) return;
 
         const database = await Core.getConfigFile("nameFilterConfig");
+        const roleConfig = await Core.getConfigFile("nameFilterConfigRoles");
+
+        let rolesToMention = ``;
 
         if (Core.isNullOrUndefined(database) || Core.isNullOrUndefined(database.invalidPseudos) || !Array.isArray(database.invalidPseudos)) {
             return;
+        }
+
+        if (Core.isNullOrUndefined(roleConfig) || Core.isNullOrUndefined(roleConfig.roles) || !Array.isArray(roleConfig.roles) || roleConfig.roles.length === 0) {
+            rolesToMention = `Aucun rôle à mentionner configuré.`;
+        } else {
+            rolesToMention = roleConfig.roles.map(roleId => `<@&${roleId}>`).join(", ");
         }
 
         const invalidPseudos = database.invalidPseudos.map(pseudo => pseudo.toLowerCase());
@@ -45,7 +54,7 @@ module.exports = {
                 );
 
             if (staffChannel)
-                await staffChannel.send({ embeds: [alertEmbed] }).catch(() => {});
+                await staffChannel.send({ content: rolesToMention, embeds: [alertEmbed] }).catch(() => {});
 
             await message.member.kick(`Pseudo invalide: ${message.author.username} (${message.author.id}) - Mot détecté : ${matchedInvalid}`)
                 .catch(() => {});
