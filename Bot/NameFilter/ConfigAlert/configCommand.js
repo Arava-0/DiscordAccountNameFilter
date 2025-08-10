@@ -78,7 +78,7 @@ module.exports = {
     const database = await Core.getConfigFile("nameFilterConfigRoles");
 
     if (Core.isNullOrUndefined(database)) {
-      return interaction.reply({
+      return interaction.editReply({
         embeds: [
           makeError(`Le fichier de configuration \`nameFilterConfigRoles\` est introuvable.`)
         ],
@@ -97,7 +97,7 @@ module.exports = {
       case "add": {
         const addRole = interaction.options.getRole("role");
         if (!addRole) {
-          return interaction.reply({
+          return interaction.editReply({
             embeds: [makeError(`Aucun rôle fourni ou rôle introuvable.`)],
             ephemeral: true
           });
@@ -105,7 +105,7 @@ module.exports = {
 
         // already present ?
         if (database.roles.includes(addRole.id)) {
-          return interaction.reply({
+          return interaction.editReply({
             embeds: [
               new EmbedBuilder()
                 .setTitle(`${client.config.emote.error} **ERREUR**`)
@@ -124,7 +124,7 @@ module.exports = {
         database.roles = Array.from(new Set(database.roles));
         await Core.updateConfig("nameFilterConfigRoles", database);
 
-        return interaction.reply({
+        return interaction.editReply({
           embeds: [
             new EmbedBuilder()
               .setTitle(`${client.config.emote.success} **SUCCÈS**`)
@@ -142,14 +142,14 @@ module.exports = {
       case "remove": {
         const removeRole = interaction.options.getRole("role");
         if (!removeRole) {
-          return interaction.reply({
+          return interaction.editReply({
             embeds: [makeError(`Aucun rôle fourni ou rôle introuvable.`)],
             ephemeral: true
           });
         }
 
         if (!database.roles.includes(removeRole.id)) {
-          return interaction.reply({
+          return interaction.editReply({
             embeds: [
               new EmbedBuilder()
                 .setTitle(`${client.config.emote.error} **ERREUR**`)
@@ -166,7 +166,7 @@ module.exports = {
         database.roles = database.roles.filter(roleId => roleId !== removeRole.id);
         await Core.updateConfig("nameFilterConfigRoles", database);
 
-        return interaction.reply({
+        return interaction.editReply({
           embeds: [
             new EmbedBuilder()
               .setTitle(`${client.config.emote.success} **SUCCÈS**`)
@@ -183,7 +183,7 @@ module.exports = {
 
       case "list": {
         if (database.roles.length === 0) {
-          return interaction.reply({
+          return interaction.editReply({
             embeds: [
               makeInfo("LISTE VIDE", `Aucun rôle n'est configuré pour être mentionné.`)
             ],
@@ -192,7 +192,7 @@ module.exports = {
         }
 
         const mentions = database.roles.map(roleId => `<@&${roleId}>`).join(", ");
-        return interaction.reply({
+        return interaction.editReply({
           embeds: [
             new EmbedBuilder()
               .setTitle(`${client.config.emote.update} **RÔLES MENTIONNÉS**`)
