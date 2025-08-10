@@ -1,7 +1,6 @@
-const { ChatInputCommandInteraction, SlashCommandBuilder, Client, InteractionContextType } = require('discord.js');
+const { ChatInputCommandInteraction, SlashCommandBuilder, Client, InteractionContextType, PermissionFlagsBits } = require('discord.js');
 const { genDisplayPage } = require('./displayer');
 const Core = require('../../../Core');
-const { ContextMenuCommandInteraction } = require('discord.js');
 
 module.exports = {
     type: "command",
@@ -16,6 +15,7 @@ module.exports = {
     .setNameLocalization("fr", "filtrenom")
     .setDescription("This command allows you to filter user names in the server.")
     .setDescriptionLocalization("fr", "Cette commande vous permet de filtrer les noms d'utilisateur sur le serveur.")
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .setContexts(InteractionContextType.Guild),
 
     /**

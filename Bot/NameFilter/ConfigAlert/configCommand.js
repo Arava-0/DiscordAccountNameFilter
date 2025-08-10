@@ -15,6 +15,7 @@ module.exports = {
     .setDescription("This command allows you to choose which role are mentioned when an alert is triggered.")
     .setDescriptionLocalization("fr", "Cette commande vous permet de choisir quel rôle est mentionné lorsqu'une alerte est déclenchée.")
     .setContexts(InteractionContextType.Guild)
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addSubcommand(subcommand =>
       subcommand
         .setName("add")
