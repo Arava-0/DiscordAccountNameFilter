@@ -1,4 +1,4 @@
-const { ChatInputCommandInteraction, SlashCommandBuilder, Client, InteractionContextType, EmbedBuilder } = require('discord.js');
+const { ChatInputCommandInteraction, SlashCommandBuilder, Client, InteractionContextType, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const Core = require('../../../Core');
 
 module.exports = {
